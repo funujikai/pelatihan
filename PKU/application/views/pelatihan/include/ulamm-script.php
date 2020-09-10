@@ -57,73 +57,13 @@
 <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyCwGoo1jtr3HgU66bulwQ6qDI4CJqpgJjU"></script>
 
 
-<script type="text/javascript">
+<script type="text/javascript">	
 	
-
-	$(document).on("click", ".klasterisasi", function () {	
-		const swalWithBootstrapButtons = Swal.mixin({
-		  customClass: {
-			confirmButton: 'btn btn-success m-2',
-			cancelButton: 'btn btn-primary'
-		  },
-		  buttonsStyling: false
-		})
-
-		swalWithBootstrapButtons.fire({
-		  title: 'Klasterisasi',
-		  text: "",
-		  icon: '',
-		  showCancelButton: true,
-		  confirmButtonText: 'Input Klasterisasi',
-		  cancelButtonText: 'Input Pelatihan',
-		  reverseButtons: true
-		}).then((result) => {
-			var pelatihantype = $(this).data('pelatihantype');	
-			var pelatihantitle = $(this).data('pelatihantitle');    										
-		  if (result.value) {
-			$('#type_klasterisasi').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');			  											
-			$('#modaladdklasterisasi').modal('show');
-		  } else if (result.dismiss === Swal.DismissReason.cancel) {
-			$('#pelatihan_type').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');			  
-			$('.select_klasterisasi').show();  
-			$("#klasterisasi").prop('required',true);
-			$.ajax({
-				url: "<?php echo base_url()?>pelatihan/get_klasterisasi",
-				data: "tipepelatihan="+$(this).data("pelatihantype"),
-				cache: false,
-				success: function(data){				         
-					$('#klasterisasi').html(data);    
-				}
-			});	
-			
-			$('#modaladd').modal('show'); 
-		  }
-		})		
-	});		
-	
-	
-	$(document).on("click", ".klasterisasi_pic_pusat", function () {	
-		const swalWithBootstrapButtons = Swal.mixin({
-		  customClass: {
-			confirmButton: 'btn btn-success m-2'
-		  },
-		  buttonsStyling: false
-		})
-
-		swalWithBootstrapButtons.fire({
-		  title: 'Klasterisasi',
-		  text: "",
-		  icon: '',
-		  confirmButtonText: 'Input Klasterisasi',
-		  reverseButtons: true
-		}).then((result) => {
-			var pelatihantype = $(this).data('pelatihantype');	
-			var pelatihantitle = $(this).data('pelatihantitle');    										
-		  if (result.value) {
-			$('#type_klasterisasi').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');			  											
-			$('#modaladdklasterisasi').modal('show');
-		  }
-		})		
+	$(document).on("click", ".project_charter", function () {	
+		var pelatihantype = $(this).data('pelatihantype');	
+		var pelatihantitle = $(this).data('pelatihantitle');    										
+		$('#type_klasterisasi').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');			
+		$('#modaladdklasterisasi').modal('show');
 	});		
 
 
@@ -146,8 +86,18 @@
 		$("#add_pelatihan :input").prop("disabled", false);
 		$('#pelatihan_type').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');	
 		$('.select_klasterisasi').hide();  
-		$("#klasterisasi").prop('required',false);
-				
+		$("#klasterisasi").prop('required',false);	
+	});	
+	
+	$(document).on("click", ".add_pelatihan_klasterisasi", function () {
+		$('#add_pelatihan').trigger("reset");
+		var pelatihantype = $(this).data('pelatihantype');	
+		var pelatihantitle = $(this).data('pelatihantitle');
+		
+		$("#add_pelatihan :input").prop("disabled", false);
+		$('#pelatihan_type').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');			  
+		$('.select_klasterisasi').show();  
+		$("#klasterisasi").prop('required',true);
 	});			
 		
 
