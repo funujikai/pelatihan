@@ -77,7 +77,7 @@ public function insert_t_approval($data)
 		
 public function select_t_pelatihan_proposal_by_approval($approval)
         {
-                $query = $this->db->query("select * from T_PELATIHAN where STATUS='submitted' and ISNULL(APPROVAL,'')='".$approval."' ");
+                $query = $this->db->query("select * from T_PELATIHAN where STATUS='submitted' and ISNULL(APPROVAL,'')='".$approval."' and CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ");
                 return $query->result();
         }
         
