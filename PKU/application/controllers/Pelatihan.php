@@ -320,12 +320,14 @@ class Pelatihan extends MY_Controller
 					'PARAM2' => ''
 				);
 
-				$no_trx_reject .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;
-
-				$no_trx = ($no_trx_reject) ? $no_trx_reject : ','.$this->create_trx_no($param);	
+				// $no_trx_reject .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value);
 				
-				$this->Pelatihan_model->update_aktif_trx_reject($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->ID);
-
+				if (!$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)){
+					$no_trx = ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;					
+					$this->Pelatihan_model->update_aktif_trx_reject($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->ID);
+				}else{
+					$no_trx = ','.$this->create_trx_no($param);
+				}
 				$data_unit_ulamm .= ','.$value;
 			}
 			
@@ -353,11 +355,18 @@ class Pelatihan extends MY_Controller
 					'PARAM2' => ''
 				);	
 				
-				$no_trx_reject .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;
+				// $no_trx_reject .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;
 												
-				$no_trx = ($no_trx_reject) ? $no_trx_reject : ','.$this->create_trx_no($param);	
+				// $no_trx = ($no_trx_reject) ? $no_trx_reject : ','.$this->create_trx_no($param);	
 				
-				$this->Pelatihan_model->update_aktif_trx_reject($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->ID);
+				// $this->Pelatihan_model->update_aktif_trx_reject($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->ID);
+				
+				if (!$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)){
+					$no_trx = ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;					
+					$this->Pelatihan_model->update_aktif_trx_reject($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->ID);
+				}else{
+					$no_trx = ','.$this->create_trx_no($param);
+				}
 				
 				$data_cabang_mekaar .= ','.$value;
 			}					

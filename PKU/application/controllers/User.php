@@ -149,7 +149,11 @@ class User extends MY_Controller {
 							
 							'sess_user_region'		    => $kode_mekaar,							
 
-							'sess_user_foto'  			=> $foto
+							'sess_user_foto'  			=> $foto,
+							
+							'sess_user_latitude'        => '-6.205312656111862',
+							
+							'sess_user_longitude'       =>  '106.82113741326904'
 
 						 );               
 

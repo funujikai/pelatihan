@@ -333,8 +333,8 @@
 
 	$('#us_add').locationpicker({
         location: {
-              latitude: -0.9470831999999999,
-              longitude: 100.417181   
+              latitude: <?php echo $this->session->userdata('sess_user_latitude'); ?>,
+              longitude: <?php echo $this->session->userdata('sess_user_longitude'); ?>
 		},
         radius: 50,
         inputBinding: {
