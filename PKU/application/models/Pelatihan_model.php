@@ -2,48 +2,48 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Pelatihan_model extends CI_Model {
 public function select_t_pelatihan()
-        {
-                $query = $this->db->query("select * from T_PELATIHAN  ");
-                return $query->result();
-        }
+{
+		$query = $this->db->query("select * from T_PELATIHAN  ");
+		return $query->result();
+}
 public function select_ms_pelatihan_type()
-        {
-                $query = $this->db->query("select * from MS_PELATIHAN_TYPE  ");
-                return $query->result();
-        }
+{
+		$query = $this->db->query("select * from MS_PELATIHAN_TYPE  ");
+		return $query->result();
+}
 
 public function select_ms_pelatihan_type_ulamm()
-        {
-                $query = $this->db->query("select * from MS_PELATIHAN_TYPE where bisnis = 'ULAMM' ");
-                return $query->result();
-        }
+{
+		$query = $this->db->query("select * from MS_PELATIHAN_TYPE where bisnis = 'ULAMM' ");
+		return $query->result();
+}
 
 public function select_ms_pelatihan_type_mekaar()
-        {
-                $query = $this->db->query("select * from MS_PELATIHAN_TYPE where bisnis = 'MEKAAR' ");
-                return $query->result();
-        }
+{
+		$query = $this->db->query("select * from MS_PELATIHAN_TYPE where bisnis = 'MEKAAR' ");
+		return $query->result();
+}
 
 public function insert_t_klasterisasi($data)
-        {
-                $this->db->insert('T_KLASTERISASI', $data);
-        }
+{
+		$this->db->insert('T_KLASTERISASI', $data);
+}
 
 public function insert_t_pelatihan($data)
-        {
-                $this->db->insert('T_PELATIHAN', $data);
-        }
+{
+		$this->db->insert('T_PELATIHAN', $data);
+}
 		
 public function insert_t_rab($data)
-        {
-                $this->db->insert('T_RAB', $data);
-        }	
+{
+		$this->db->insert('T_RAB', $data);
+}	
 
 public function select_t_rab_by_id($id)
-        {
-                $query = $this->db->query("select * from T_RAB where ID_PELATIHAN = '".$id."'");
-				return $query->result();
-        }
+{
+		$query = $this->db->query("select * from T_RAB where ID_PELATIHAN = '".$id."'");
+		return $query->result();
+}
         
 public function insert_t_dokumen($data)
         {
@@ -76,9 +76,14 @@ public function insert_t_approval($data)
         }
 		
 public function select_t_pelatihan_proposal_by_approval($approval)
-        {
+        {			
+			if ($approval=='' || $approval=='Pinca'){	
                 $query = $this->db->query("select * from T_PELATIHAN where STATUS='submitted' and ISNULL(APPROVAL,'')='".$approval."' and CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ");
-                return $query->result();
+			}else{
+                $query = $this->db->query("select * from T_PELATIHAN where STATUS='submitted' and ISNULL(APPROVAL,'')='".$approval."' ");				
+			}
+				
+            return $query->result();
         }
         
 public function insert_t_pelatihan_lpj($data)
@@ -93,8 +98,12 @@ public function insert_t_rab_lpj($data)
         
 public function select_t_pelatihan_lpj_by_approval($approval)
         {
+			if ($approval=='' || $approval=='Pinca'){	
+                $query = $this->db->query("select * from T_PELATIHAN where STATUS='lpj_submitted' and ISNULL(APPROVAL,'')='".$approval."' and CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ");			
+			}else{				
                 $query = $this->db->query("select * from T_PELATIHAN where STATUS='lpj_submitted' and ISNULL(APPROVAL,'')='".$approval."' ");
-                return $query->result();
+			}
+            return $query->result();
         }
 
 public function insert_t_kehadiran($data)

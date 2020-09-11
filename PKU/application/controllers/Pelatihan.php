@@ -255,10 +255,7 @@ class Pelatihan extends MY_Controller
 			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('Kadiv');									
 		}else{
 			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('');
-		}			
-		
-		
-		
+		}								
 
         $this->load->view('layout/gabung', $data);
     }
