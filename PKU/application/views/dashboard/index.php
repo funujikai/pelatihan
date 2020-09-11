@@ -5,7 +5,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <h2 class="title-2">Dashboard <?php echo 'id_bisnis='.$this->session->userdata('sess_user_id_bisnis'); ?></h2>
+                                    <h2 class="title-2">Dashboard</h2>
                                 </div>
                             </div>
                         </div>
